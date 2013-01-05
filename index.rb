@@ -2,6 +2,16 @@ require 'bundler'
 require 'open-uri'
 Bundler.require
 
+ActiveRecord::Base.establish_connection(
+  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  :host     => db.host,
+  :port     => db.port,
+  :username => db.user,
+  :password => db.password,
+  :database => db.path[1..-1],
+  :encoding => 'utf8'
+)
+
 configure do |c|
   # enable :sessions
   set :root, File.dirname(__FILE__)
