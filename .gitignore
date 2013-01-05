@@ -2,3 +2,4 @@
 *.sqlite
 developent.sqlite
 development.db
+.rbenv-version

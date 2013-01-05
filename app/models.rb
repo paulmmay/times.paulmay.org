@@ -1,3 +1,3 @@
-class TimesPage < ActiveRecord::Base
+class Timespage < ActiveRecord::Base
 
 end
