@@ -1,11 +1,37 @@
-module Helpers
+#------------------------------------------------------------------------#
+# Irish Times Tool
+# Paul May, 2013
+#------------------------------------------------------------------------#
 
-  module Front
+#------------------------------------------------------------------------#
+# autoUpdate
+# Description: The core update function - run queries, save results
+#------------------------------------------------------------------------#
+def autoUpdate
+   #Updatetimestamp.create(:updated=>Time.now,:status=>true)
+   puts "autoUpdate started at #{Time.now}"
+   uri = "http://www.irishtimes.com"
+   begin
+	   source = getData(uri)
+	   TimesPage.create(:updated=>Time.now,:page_source=>source,:url=>uri)
+	   #Updatetimestamp.create(:updated=>Time.now,:status=>false)
+	   puts "autoUpdate finished at #{Time.now}"
+	   true
+   rescue Exception=>e
+      puts e
+      false
+   end
+end
 
-    def hi(text)
-      "Module Helpers: Ola #{text}"
-    end
-
-  end
-
+#------------------------------------------------------------------------#
+# getData
+# Description: Gets data from a URL and converts it from XML into a hash
+#------------------------------------------------------------------------#
+def getData(location)
+   # get the XML and turn it into a hash
+   uri = URI.parse(location)
+   str = uri.read
+   return str
+   #data = Hash.from_xml(str)
+   #return data
 end

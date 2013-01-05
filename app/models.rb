@@ -1,2 +1,3 @@
-class Thing < ActiveRecord::Base
+class TimesPage < ActiveRecord::Base
+
 end
