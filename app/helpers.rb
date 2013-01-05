@@ -13,7 +13,7 @@ def autoUpdate
    uri = "http://www.irishtimes.com"
    begin
 	   source = getData(uri)
-	   t = Timespage.create(:updated=>Time.now,:page_source=>source,:url=>uri)
+	   t = Timespage.new(:updated=>Time.now,:page_source=>source,:url=>uri)
 	   t.save
 	   #Updatetimestamp.create(:updated=>Time.now,:status=>false)
 	   puts "autoUpdate finished at #{Time.now}"
