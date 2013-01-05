@@ -11,7 +11,7 @@ configure do |c|
 end
 
 configure :development, :test do
-set :database, 'sqlite://development.db'
+set :database, 'sqlite3://db/development.sqlite'
 end
 
 configure :production do
