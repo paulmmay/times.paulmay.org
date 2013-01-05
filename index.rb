@@ -1,5 +1,6 @@
 require 'bundler'
 require 'open-uri'
+
 Bundler.require
 
 configure do |c|
