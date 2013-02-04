@@ -7,4 +7,8 @@ desc "Automatically update DB"
    task :autoupdate do
    autoUpdate
  end
+desc "Automatically update images"
+   task :updateimages do
+   updateImages
+end
 end
