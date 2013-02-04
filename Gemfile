@@ -4,6 +4,7 @@ gem 'sass'
 gem 'json'
 gem 'activerecord'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
+gem 'nokogiri'
 
 group :development do
   gem 'sqlite3'

@@ -1,11 +1,11 @@
 #------------------------------------------------------------------------#
-# Irish Times Tool
+# Irish Times Tools
 # Paul May, 2013
 #------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------#
 # autoUpdate
-# Description: The core update function - run queries, save results
+# Description: Get the home page and the main business page
 #------------------------------------------------------------------------#
 def autoUpdate
    #Updatetimestamp.create(:updated=>Time.now,:status=>true)
@@ -25,6 +25,38 @@ def autoUpdate
       false
    end
 end
+
+=begin
+#------------------------------------------------------------------------#
+# updateImages
+# Description: The core update function - run queries, save results
+#------------------------------------------------------------------------#
+def updateImages
+   #Updatetimestamp.create(:updated=>Time.now,:status=>true)
+   puts "updateImages started at #{Time.now}"
+   uri_home = "http://www.irishtimes.com"
+   begin
+	   source_home = getData(uri_home)
+	   html_doc = Nokogiri::HTML(source_home)
+	   #-------------------------- Elements --------------------------------#	   
+	   image_url = html_doc.at_css('img#mainimage')['src']
+	   image_caption = html_doc.at_css('p.head-img-caption').content
+	   image_link = html_doc.at_css('a.head-img-link')['href']
+	   
+	   #remove image_url timestamp
+	   image_url = image_url[0..image_url.index("?")-1]
+	   
+	   puts image_url, image_caption, link_url
+	   #--------------------------------------------------------------------#	   
+	   t = Timesimage.create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
+	   puts "updateImages finished at #{Time.now}"
+	   true
+   rescue Exception=>e
+      puts e
+      false
+   end
+end
+=end
 
 #------------------------------------------------------------------------#
 # getData
