@@ -26,7 +26,6 @@ def autoUpdate
    end
 end
 
-=begin
 #------------------------------------------------------------------------#
 # updateImages
 # Description: The core update function - run queries, save results
@@ -45,10 +44,10 @@ def updateImages
 	   
 	   #remove image_url timestamp
 	   image_url = image_url[0..image_url.index("?")-1]
-	   
-	   puts image_url, image_caption, link_url
-	   #--------------------------------------------------------------------#	   
-	   t = Timesimage.create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
+
+	   #--------------------------------------------------------------------#	
+	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
+	   puts image_url, image_caption, image_link   
 	   puts "updateImages finished at #{Time.now}"
 	   true
    rescue Exception=>e
@@ -56,7 +55,6 @@ def updateImages
       false
    end
 end
-=end
 
 #------------------------------------------------------------------------#
 # getData
