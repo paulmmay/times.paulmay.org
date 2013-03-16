@@ -39,13 +39,14 @@ def updateImages
 	   html_doc = Nokogiri::HTML(source_home)
 	   #-------------------------- Elements --------------------------------#	   
 	   image_url = html_doc.at_css('div.story').at_css("img")["src"]
+	   image_credit = html_doc.at_css('div.story').at_css("img")["title"]
 	   image_url = image_url.sub("box_620_330","box_600") #swap out for a higher res image
 	   image_link = html_doc.at_css('div.story').at_css("a")['href']
 	   image_link = image_link.gsub! /\t/, ''
 	   image_caption = html_doc.at_css('div.story').at_css("span.h2").text
 	   #puts image_link
 	   #--------------------------------------------------------------------#	
-	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
+	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
 	   puts "updateImages finished at #{Time.now}"
 	   true
    rescue Exception=>e
