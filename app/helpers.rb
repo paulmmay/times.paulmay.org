@@ -38,16 +38,14 @@ def updateImages
 	   source_home = getData(uri_home)
 	   html_doc = Nokogiri::HTML(source_home)
 	   #-------------------------- Elements --------------------------------#	   
-	   image_url = html_doc.at_css('img#mainimage')['src']
-	   image_caption = html_doc.at_css('p.head-img-caption').content
-	   image_link = html_doc.at_css('a.head-img-link')['href']
-	   
+	   image_url = html_doc.at_css('div.index_story').at_css("img")["src"]
+	   image_link = html_doc.at_css('div.index_story').at_css("a")['href']
+	   image_caption = html_doc.at_css('div.index_story').at_css("img")["title"]
 	   #remove image_url timestamp
-	   image_url = image_url[0..image_url.index("?")-1]
+	   #image_url = image_url[0..image_url.index("?")-1]
 
 	   #--------------------------------------------------------------------#	
 	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
-	   puts image_url, image_caption, image_link   
 	   puts "updateImages finished at #{Time.now}"
 	   true
    rescue Exception=>e
