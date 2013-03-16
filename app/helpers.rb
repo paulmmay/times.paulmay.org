@@ -43,7 +43,7 @@ def updateImages
 	   image_link = html_doc.at_css('div.story').at_css("a")['href']
 	   image_link = image_link.gsub! /\t/, ''
 	   image_caption = html_doc.at_css('div.story').at_css("span.h2").text
-	   puts image_link
+	   #puts image_link
 	   #--------------------------------------------------------------------#	
 	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
 	   puts "updateImages finished at #{Time.now}"
