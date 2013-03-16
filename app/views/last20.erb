@@ -1,0 +1,11 @@
+<ul>
+<% @result.each do |item|%>
+<li>
+<div class="single_story">
+<a href="http://www.irishtimes.com<%=item.image_link%>">
+<div class="story_image"><img src="http://www.irishtimes.com<%=item.image_url%>" /></div>
+<div class="story_caption"><h2 class="story_caption"><%=item.image_caption%></h2></div>
+</a>
+</li>
+<%end%>
+</ul>
