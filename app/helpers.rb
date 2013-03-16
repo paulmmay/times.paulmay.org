@@ -38,12 +38,10 @@ def updateImages
 	   source_home = getData(uri_home)
 	   html_doc = Nokogiri::HTML(source_home)
 	   #-------------------------- Elements --------------------------------#	   
-	   image_url = html_doc.at_css('div.index_story').at_css("img")["src"]
-	   image_link = html_doc.at_css('div.index_story').at_css("a")['href']
-	   image_caption = html_doc.at_css('div.index_story').at_css("img")["title"]
-	   #remove image_url timestamp
-	   #image_url = image_url[0..image_url.index("?")-1]
-
+	   image_url = html_doc.at_css('div.story').at_css("img")["src"]
+	   image_url = image_url.sub("box_620_330","box_600") #swap out for a higher res image
+	   image_link = html_doc.at_css('div.story').at_css("a")['href']
+	   image_caption = html_doc.at_css('div.story').at_css("span.h2").text
 	   #--------------------------------------------------------------------#	
 	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link)
 	   puts "updateImages finished at #{Time.now}"
