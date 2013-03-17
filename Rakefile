@@ -12,5 +12,6 @@ desc "Automatically update images"
    updateImages("http://www.irishtimes.com")
    updateImages("http://www.irishtimes.com/business")
    updateImages("http://www.irishtimes.com/sport")
+   updateImages("http://www.irishtimes.com/culture")
 end
 end

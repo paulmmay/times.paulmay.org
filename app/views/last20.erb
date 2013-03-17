@@ -1,12 +1,14 @@
 
 <% @result.each do |item|%>
 
-<div class="single_story">
-<a href="http://www.irishtimes.com<%=item.image_link%>">
-<div class="single_image">
-<img src="http://www.irishtimes.com<%=item.image_url%>" title="<%=item.image_credit%>"/>
+<div class="container">
+<a href="http://www.irishtimes.com<%=item.image_link%>" target="_blank">
+<div class="card">
+<div class="face front">
+<img class="bigImage" src="http://www.irishtimes.com<%=item.image_url%>">
 </div>
-<div class="story_caption"><h2 class="story_caption"><%=item.image_caption%></h2></div>
+</div>
 </a>
+</div>
 
 <%end%>

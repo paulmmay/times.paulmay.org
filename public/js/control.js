@@ -36,6 +36,6 @@ utils = {
         //  220px = 0.5em
         control.fontsize = ((control.imgWidth - 220)/220*0.5)+0.5;
         //  Now set them all up
-        $('div.single_story').css({'width': control.imgWidth, 'height': control.imgHeight, 'font-size': control.fontsize + 'em'});
+        $('div.container').css({'width': control.imgWidth, 'height': control.imgHeight, 'font-size': control.fontsize + 'em'});
     }
 };
