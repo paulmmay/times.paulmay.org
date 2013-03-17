@@ -3,8 +3,8 @@ Image layout control. Adapted from https://github.com/revdancatt/CAT540-guardian
 */
 control = {
     
-    imgWidth: 440,
-    imgHeight: 276,
+    imgWidth: 460,
+    imgHeight: 245,
     fontsize: '1em',
     pageY: 100,
 
@@ -28,11 +28,11 @@ utils = {
 
     windowResized: function() {
         //  work out the image sizes
-        var fit = parseInt($('body').innerWidth()/440, 10)+1;
+        var fit = parseInt($('body').innerWidth()/460, 10)+1;
         control.imgWidth = parseInt($('body').innerWidth()/fit, 10);
-        control.imgHeight = parseInt(276 * control.imgWidth/440, 10);
+        control.imgHeight = parseInt(245 * control.imgWidth/460, 10);
         //  work out the font size
-        //  at 440px wide the biggest font size should be 1em and line-height 1.2em
+        //  at 460px wide the biggest font size should be 1em and line-height 1.2em
         //  220px = 0.5em
         control.fontsize = ((control.imgWidth - 220)/220*0.5)+0.5;
         //  Now set them all up
