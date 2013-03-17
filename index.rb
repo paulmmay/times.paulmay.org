@@ -111,7 +111,7 @@ end
 
 get '/view' do
 	@result = Timesimage.find(:all, :order => "id desc", :limit => 60)
-	erb :last20
+	erb :last60
 end
 
 #================================================ Models ================================================#
