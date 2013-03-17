@@ -30,12 +30,11 @@ end
 # updateImages
 # Description: The core update function - run queries, save results
 #------------------------------------------------------------------------#
-def updateImages
+def updateImages(_uri)
    #Updatetimestamp.create(:updated=>Time.now,:status=>true)
    puts "updateImages started at #{Time.now}"
-   uri_home = "http://www.irishtimes.com"
    begin
-	   source_home = getData(uri_home)
+	   source_home = getData(_uri)
 	   html_doc = Nokogiri::HTML(source_home)
 	   #-------------------------- Elements --------------------------------#	   
 	   image_url = html_doc.at_css('div.story').at_css("img")["src"]

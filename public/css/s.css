@@ -51,9 +51,9 @@ div.single_story {
     margin: 0;
     border: 0;
     padding: 0;
-    width: 460px;
+    width: 440px;
     height: 276px;
-    overflow: visible;
+    overflow: hidden;
     float: left;
     position: relative;
     /*opacity: 0;
