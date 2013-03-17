@@ -9,9 +9,9 @@ desc "Automatically update DB"
  end
 desc "Automatically update images"
    task :updateimages do
-   updateImages("http://www.irishtimes.com")
    updateImages("http://www.irishtimes.com/business")
-   updateImages("http://www.irishtimes.com/sport")
    updateImages("http://www.irishtimes.com/culture")
+   updateImages("http://www.irishtimes.com/sport")
+   updateImages("http://www.irishtimes.com")
 end
 end
