@@ -46,7 +46,7 @@ def updateImages(_uri)
 	   image_caption = html_doc.at_css('div.story').at_css("span.h2").text
 	   #puts image_link
 	   #--------------------------------------------------------------------#	
-	   t = Timesimage.where(:image_url =>image_url).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
+	   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
 	   puts "updateImages finished at #{Time.now}"
 	   true
    rescue Exception=>e
