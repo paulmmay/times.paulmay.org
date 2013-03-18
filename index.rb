@@ -82,7 +82,7 @@ def updateImages(_uri)
 		   image_url = image_url.sub("box_300","box_600") #swap out for a higher res image - third case
 		   image_link = story.at_css("a")['href']
 		   image_link = image_link.gsub! /\t/, ''
-		   image_caption = story.at_css("span.h2").text
+		   image_caption = story.at_css("span").text
 		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
 		rescue Exception=>e
 		puts e
