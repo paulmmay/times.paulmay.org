@@ -1,7 +1,9 @@
 require './index'
 require 'sinatra/activerecord/rake'
-require './app/helpers.rb'
 
+/* 
+I use Heroku Scheduler to call scheduled:autoupdate and scheduled:updateimages periodically.
+*/
 namespace :scheduled do
 desc "Automatically update DB"
    task :autoupdate do

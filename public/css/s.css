@@ -1,3 +1,7 @@
+/* 
+CSS for Times Grid - an adaptation-in-progress of https://github.com/revdancatt/CAT540-guardian-picture-grid by Dan Catt 
+that links to content on the Irish Times, rather than the Guardian.
+*/
 body {
     margin:0;
     background: black;

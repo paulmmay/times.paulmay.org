@@ -1,5 +1,6 @@
 /* 
-Image layout control. Adapted from https://github.com/revdancatt/CAT540-guardian-picture-grid/blob/master/js/control.js by Dan Catt. 
+CSS for Times Grid - an adaptation-in-progress of https://github.com/revdancatt/CAT540-guardian-picture-grid by Dan Catt 
+that links to content on the Irish Times, rather than the Guardian.
 */
 control = {
     
@@ -14,7 +15,6 @@ control = {
 
         //  call the resize function in a secon after page load, juat 'cause
         setTimeout("utils.windowResized()", 1000);
-
     }
 };
 

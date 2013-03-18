@@ -63,7 +63,7 @@ end
 
 #------------------------------------------------------------------------#
 # updateImages
-# Description: The core update function - run queries, save results
+# Description: The core update function - get links to images.
 #------------------------------------------------------------------------#
 def updateImages(_uri)
    #Updatetimestamp.create(:updated=>Time.now,:status=>true)
