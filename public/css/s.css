@@ -44,7 +44,6 @@ div.container {
     overflow: visible;
     float: left;
     position: relative;
-    z-index: 100;
     line-height: 2em;
 }
 
@@ -55,8 +54,7 @@ div.face {
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-
+    overflow: visible;
 }
 
 div.face img {
@@ -66,41 +64,20 @@ div.face img {
 
 .back {
     background: #F3F3F3;
-    display: none;
     font-size: 1em;
     cursor: pointer;
 }
 
-.back h1,
-.back h2 {
-    margin: 6px;
-}
-
-.back h1 {
-    font-family: arial,sans-serif;
+.front{
+    background: #F3F3F3;
     font-size: 1em;
-    line-height: 1.2em;
-    color: #98BCDB;
+    cursor: pointer;
+    display:block;
 }
 
-.back h2 {
-    font-family: "adelle", georgia,serif;
+h2 {
+    font-family: georgia,serif;
     font-size: 1.8em;
     color: #004A83;
-}
-
-.back .photocredit {
-    font-family: arial,sans-serif;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    font-size: 11px;
-    color: #333;
-    text-align: right;
-    background: #D9D9D9;
-}
-
-.back .photocredit p {
-    margin: 4px;
+     margin: 6px;
 }

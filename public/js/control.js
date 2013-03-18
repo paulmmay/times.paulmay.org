@@ -14,6 +14,7 @@ control = {
 
         //  call the resize function in a secon after page load, juat 'cause
         setTimeout("utils.windowResized()", 1000);
+
     }
 };
 
