@@ -79,7 +79,8 @@ def updateImages(_uri)
 		   image_url = image_url.sub("box_620_330","box_600") #swap out for a higher res image
 		   image_url = image_url.sub("box_460_245","box_600") #swap out for a higher res image - second case
 		   image_url = image_url.sub("box_140","box_600") #swap out for a higher res image - third case
-		   image_url = image_url.sub("box_300","box_600") #swap out for a higher res image - third case
+		   image_url = image_url.sub("box_300","box_600") #swap out for a higher res image - fourth case
+		   image_url = image_url.sub("box_220","box_600") #swap out for a higher res image - fourth case
 		   image_link = story.at_css("a")['href']
 		   image_link = image_link.gsub! /\t/, ''
 		   image_caption = story.at_css("span").text

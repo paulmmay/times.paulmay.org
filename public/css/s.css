@@ -49,6 +49,7 @@ div.container {
     float: left;
     position: relative;
     line-height: 2em;
+    cursor:pointer;
 }
 
 div.card,
