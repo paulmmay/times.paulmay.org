@@ -78,6 +78,7 @@ def updateImages(_url)
   		   image_url = image_url.sub("box_220","box_600") #swap out for a higher res image - fourth case
   		   image_link = story.at_css("a")['href']
   		   image_link = image_link.gsub! /\t/, ''
+         image_caption = ""
          image_caption = story.at_css("span").text
          story_names = getNames("http://www.irishtimes.com",image_link).to_s #get names/topics in the story as a list and cast them to a string
   		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit,:article_topics=>story_names)
