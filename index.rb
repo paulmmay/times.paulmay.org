@@ -60,12 +60,12 @@ end
 # updateImages
 # Description: The core update function - get links to images.
 #------------------------------------------------------------------------#
-def updateImages(_uri)
+def updateImages(_url)
    #Updatetimestamp.create(:updated=>Time.now,:status=>true)
    puts "updateImages started at #{Time.now}"
    begin
-  	   source_home = getData(_uri)
-  	   html_doc = Nokogiri::HTML(source_home)
+  	  
+  	   html_doc = Nokogiri::HTML(open(_url))
   	   #-------------------------- Elements --------------------------------#	   
   	   stories = html_doc.css('div.story')
   	   stories.each do |story|
@@ -79,7 +79,7 @@ def updateImages(_uri)
   		   image_link = story.at_css("a")['href']
   		   image_link = image_link.gsub! /\t/, ''
          image_caption = story.at_css("span").text
-         story_names = getNames(image_link).to_s #get names/topics in the story as a list and cast them to a string
+         story_names = getNames("http://www.irishtimes.com",image_link).to_s #get names/topics in the story as a list and cast them to a string
   		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit,:article_topics=>story_names)
 	     end
     rescue Exception=>e
@@ -91,9 +91,8 @@ end
 # getNames
 # Description: Does a reasonable job of identifying names in an article
 #------------------------------------------------------------------------#
-def getNames(_uri)
-    source = getData(_uri)
-    html_doc = Nokogiri::HTML(source)
+def getNames(_domain, _location)
+    html_doc = Nokogiri::HTML(open(_domain+_location))
     paragraphs = html_doc.css("p")
     names = []
     paragraphs.each do |p|
@@ -113,10 +112,9 @@ end
 # getData
 # Description: Gets data from a URL and converts it from XML into a hash
 #------------------------------------------------------------------------#
-def getData(location)
-   # get the XML and turn it into a hash
-   uri = URI.parse(location)
-   str = uri.read
+def getData(_location)
+   source = URI.parse(_location)
+   str = source.read
    return str
    #data = Hash.from_xml(str)
    #return data
