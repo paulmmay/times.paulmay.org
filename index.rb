@@ -80,7 +80,7 @@ def updateImages(_uri)
   		   image_link = image_link.gsub! /\t/, ''
          image_caption = story.at_css("span").text
          story_names = getNames(image_link).to_s #get names/topics in the story as a list and cast them to a string
-  		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
+  		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit,:article_topics=story_names)
 	     end
     rescue Exception=>e
       puts e
