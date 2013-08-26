@@ -4,7 +4,8 @@ require 'sinatra/activerecord/rake'
 namespace :scheduled do
 desc "Automatically update DB"
    task :autoupdate do
-   autoUpdate
+   autoUpdate("http://www.irishtimes.com")
+   autoUpdate("http://www.irishtimes.com/business")
  end
 desc "Automatically update images"
    task :updateimages do

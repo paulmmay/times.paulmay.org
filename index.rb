@@ -1,10 +1,10 @@
+# encoding: utf-8
 #--------------------------------------------------------------------------------------------------------------#
 # Irish Times Tools
 # Paul May, 2013
 #--------------------------------------------------------------------------------------------------------------#
 
 #==================================== Sinatra and Heroku DB Configuration ==================================== #
-
 require 'bundler'
 require 'open-uri'
 require 'sinatra/activerecord'
@@ -42,17 +42,12 @@ end
 # autoUpdate
 # Description: Get the home page and the business page
 #------------------------------------------------------------------------#
-def autoUpdate
+def autoUpdate(_uri)
    #Updatetimestamp.create(:updated=>Time.now,:status=>true)
    puts "autoUpdate started at #{Time.now}"
-   uri_home = "http://www.irishtimes.com"
-   uri_business = "http://www.irishtimes.com/business/"
    begin
-	   source_home = getData(uri_home)
-	   source_business = getData(uri_business)
-	   t = Timespage.create(:updated=>Time.now,:page_source=>source_home,:url=>uri_home)
-	   t = Timespage.create(:updated=>Time.now,:page_source=>source_business,:url=>uri_business)
-	   #Updatetimestamp.create(:updated=>Time.now,:status=>false)
+	   source = getData(_uri)
+	   t = Timespage.create(:updated=>Time.now,:page_source=>source,:url=>_uri)
 	   puts "autoUpdate finished at #{Time.now}"
 	   true
    rescue Exception=>e
@@ -68,27 +63,50 @@ end
 def updateImages(_uri)
    #Updatetimestamp.create(:updated=>Time.now,:status=>true)
    puts "updateImages started at #{Time.now}"
-	   source_home = getData(_uri)
-	   html_doc = Nokogiri::HTML(source_home)
-	   #-------------------------- Elements --------------------------------#	   
-	   stories = html_doc.css('div.story');
-	   stories.each do |story|
-	   begin
-		   image_url = story.at_css("img")["src"]
-		   image_credit = story.at_css("img")["title"]
-		   image_url = image_url.sub("box_620_330","box_600") #swap out for a higher res image
-		   image_url = image_url.sub("box_460_245","box_600") #swap out for a higher res image - second case
-		   image_url = image_url.sub("box_140","box_600") #swap out for a higher res image - third case
-		   image_url = image_url.sub("box_300","box_600") #swap out for a higher res image - fourth case
-		   image_url = image_url.sub("box_220","box_600") #swap out for a higher res image - fourth case
-		   image_link = story.at_css("a")['href']
-		   image_link = image_link.gsub! /\t/, ''
-		   image_caption = story.at_css("span").text
-		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
-		rescue Exception=>e
-		puts e
-		end
-	  end
+   begin
+  	   source_home = getData(_uri)
+  	   html_doc = Nokogiri::HTML(source_home)
+  	   #-------------------------- Elements --------------------------------#	   
+  	   stories = html_doc.css('div.story')
+  	   stories.each do |story|
+  		   image_url = story.at_css("img")["src"]
+  		   image_credit = story.at_css("img")["title"]
+  		   image_url = image_url.sub("box_620_330","box_600") #swap out for a higher res image
+  		   image_url = image_url.sub("box_460_245","box_600") #swap out for a higher res image - second case
+  		   image_url = image_url.sub("box_140","box_600") #swap out for a higher res image - third case
+  		   image_url = image_url.sub("box_300","box_600") #swap out for a higher res image - fourth case
+  		   image_url = image_url.sub("box_220","box_600") #swap out for a higher res image - fourth case
+  		   image_link = story.at_css("a")['href']
+  		   image_link = image_link.gsub! /\t/, ''
+         image_caption = story.at_css("span").text
+         story_names = getNames(image_link).to_s #get names/topics in the story as a list and cast them to a string
+  		   t = Timesimage.where(:image_link =>image_link).first_or_create(:updated=>Time.now,:image_url=>image_url,:image_caption=>image_caption,:image_link=>image_link,:image_credit=>image_credit)
+	     end
+    rescue Exception=>e
+      puts e
+    end
+end
+
+#------------------------------------------------------------------------#
+# getNames
+# Description: Does a reasonable job of identifying names in an article
+#------------------------------------------------------------------------#
+def getNames(_uri)
+    source = getData(_uri)
+    html_doc = Nokogiri::HTML(source)
+    paragraphs = html_doc.css("p")
+    names = []
+    paragraphs.each do |p|
+      matches = p.text.scan(/(([A-Z][\p{Letter}]*\W){2,6})/) #Okay pattern to match names.
+      matches.each do |match|
+        match.each do |m| 
+        if m != "" 
+          names.push(m)
+        end
+      end
+    end
+  end
+  return names.uniq
 end
 
 #------------------------------------------------------------------------#
